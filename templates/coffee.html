@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+
+    <title>오늘의 커피</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            font-family: 'Jua', sans-serif;
+        }
+
+        .item-img {
+            width: 500px;
+            height: 300px;
+            margin-top: 30px;
+
+            background-image: url("https://www.tastingtable.com/img/gallery/coffee-brands-ranked-from-worst-to-best/intro-1640648130.webp");
+            background-position: center;
+            background-size: cover;
+        }
+
+        .item-desc {
+            width: 500px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .item-order {
+            width: 500px;
+            margin-bottom: 50px;
+        }
+
+        .btn-order {
+            margin: auto;
+            width: 100px;
+
+            display: block;
+        }
+
+        .wrap {
+            width: 500px;
+            margin: auto;
+        }
+
+        .rate {
+            color: blue;
+        }
+    </style>
+
+    <script>
+        $(document).ready(function () {
+            listing();
+        });
+
+        /*Get 방식*/
+        function listing() {
+            $.ajax({
+                type: 'GET',
+                url: '/order_list',
+                data: {},
+                success: function (response) {
+                    let coffees = response['coffee_order']
+                    for (let i = 0; i < coffees.length; i++) {
+                        let name = coffees[i]['name'];
+                        let body = coffees[i]['body'];
+                        let acidity = coffees[i]['acidity'];
+                        let sweet = coffees[i]['sweet'];
+                        let flavor = coffees[i]['flavor'];
+                        let bitter = coffees[i]['bitter'];
+
+                        let temp_html = `<tr>
+                                            <th scope="col">${name}</th>
+                                                <th scope="col">${body}</th>
+                                                <th scope="col">${acidity}</th>
+                                                <th scope="col">${sweet}</th>
+                                                <th scope="col">${flavor}</th>
+                                                <th scope="col">${bitter}</th>
+                                                <th><button onclick="delete_orders('${name}')">삭제하기</button></th>
+                                          </tr>`
+
+                        $('#orders-box').append(temp_html)
+                    }
+                }
+            })
+        }
+
+
+        /*post 방식*/
+        function order() {
+            let name = $('#order-name').val();
+            let body = $('#order-body').val();
+            let acidity = $('#order-acidity').val();
+            let sweet = $('#order-sweet').val();
+            let flavor = $('#order-flavor').val();
+            let bitter = $('#order-bitter').val();
+
+            $.ajax({
+                type: "POST",
+                url: "/order",
+                data: {
+                    name_give: name, body_give: body, acidity_give: acidity, sweet_give: sweet,
+                    flavor_give: flavor, bitter_give: bitter},
+                success: function (response) {
+                    if (response["result"] == "success") {
+                        alert(response["msg"]);
+                        window.location.reload();
+                    }
+                }
+            })
+        }
+
+
+        /*삭제기능*/
+        function delete_orders(name) {
+            $.ajax({
+                type: 'POST',
+                url: '/order_delete',
+                data: {name_give: name},
+                success: function (response) {
+                    alert(response['msg']);
+                    window.location.reload()
+                }
+            });
+        }
+    </script>
+</head>
+
+<body>
+<div class="wrap">
+    <div class="item-img"></div>
+    <div class="item-desc">
+        <h1>Coffee 관리자 페이지</h1>
+        <p>Coffee 등록페이지입니다.</p>
+    </div>
+    <div class="item-order">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <span class="input-group-text">커피콩 이름</span>
+            </div>
+            <input id="order-name" type="text" class="form-control" aria-label="Default"
+                   aria-describedby="inputGroup-sizing-default">
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">body</label>
+            </div>
+            <select id="order-body" class="custom-select">
+                <option selected>-- 단계 선택 --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">acidity</label>
+            </div>
+            <select id="order-acidity" class="custom-select">
+                <option selected>-- 단계 선택 --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">sweet</label>
+            </div>
+            <select id="order-sweet" class="custom-select">
+                <option selected>-- 단계 선택 --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">flavor</label>
+            </div>
+            <select id="order-flavor" class="custom-select">
+                <option selected>-- 단계 선택 --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">bitter</label>
+            </div>
+            <select id="order-bitter" class="custom-select">
+                <option selected>-- 단계 선택 --</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+
+
+        <button type="button" onclick="order()" class="btn btn-primary btn-order">저장하기</button>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">body</th>
+            <th scope="col">acidity</th>
+            <th scope="col">sweet</th>
+            <th scope="col">flavor</th>
+            <th scope="col">bitter</th>
+
+        </tr>
+        </thead>
+        <tbody id="orders-box">
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
