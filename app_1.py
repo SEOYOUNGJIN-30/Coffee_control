@@ -9,7 +9,7 @@ client = MongoClient('localhost', 27017)
 db = client.coffe_site
 
 
-## HTML 화면 보여주기 후후
+## HTML 화면 보여주기
 @app.route('/')
 def homework():
     return render_template('coffee.html')
