@@ -1,0 +1,57 @@
+* {
+    font-family: 'Jua', sans-serif;
+}
+
+.login{
+    padding-left: 25px;
+    padding-top: 10px;
+    /*padding: 10px 30px;*/
+
+    color: black;
+
+}
+
+.item-img {
+    width: 500px;
+    height: 300px;
+    margin-top: 30px;
+
+    background-image: url("https://www.tastingtable.com/img/gallery/coffee-brands-ranked-from-worst-to-best/intro-1640648130.webp");
+    background-position: center;
+    background-size: cover;
+}
+
+.item-desc {
+    width: 500px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.tabitem-order > item-order {
+    width: 500px;
+    margin-bottom: 50px;
+}
+
+.btn-order {
+    margin: auto;
+    width: 100px;
+
+    display: block;
+}
+
+.wrap {
+    width: 500px;
+    margin: auto;
+}
+
+.orders_table {
+    font-size: 20px;
+    width: 80%;
+    text-align: center;
+}
+
+.orders_list {
+
+    font-size: 15px;
+    text-align: center;
+}
