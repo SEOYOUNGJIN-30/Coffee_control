@@ -1,13 +1,13 @@
 * {
-    font-family: 'Jua', sans-serif;
+    font-family: 'Nanum Gothic', sans-serif;
 }
 
-.login{
-    padding-left: 25px;
-    padding-top: 10px;
-    /*padding: 10px 30px;*/
+/*.login{*/
+/*    padding-left: 25px;*/
+/*    padding-top: 10px;*/
+/*    !*padding: 10px 30px;*!*/
 
-    color: black;
+/*    color: black;*/
 
 }
 
@@ -16,7 +16,7 @@
     height: 300px;
     margin-top: 30px;
 
-    background-image: url("https://www.tastingtable.com/img/gallery/coffee-brands-ranked-from-worst-to-best/intro-1640648130.webp");
+    background-image: url("https://images.unsplash.com/photo-1606791405792-1004f1718d0c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTl8fGNvZmZlZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60");
     background-position: center;
     background-size: cover;
 }
@@ -46,7 +46,7 @@
 
 .orders_table {
     font-size: 20px;
-    width: 80%;
+    width: 100%;
     text-align: center;
 }
 

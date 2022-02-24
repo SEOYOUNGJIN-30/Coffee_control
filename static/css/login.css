@@ -1,0 +1,78 @@
+/*.login_img{*/
+/*    width: 700px;*/
+/*    height: 750px;*/
+/*    display: inline-block;*/
+
+/*    margin-top: 80px;*/
+/*    margin-left: 400px;*/
+/*    border-radius: 30px;*/
+
+/*}*/
+
+.login_wrap {
+    height: 400px;
+    width: 300px;
+    margin-top: 150px;
+    margin-left: 680px;
+
+    float: left;
+
+    /*background-color: saddlebrown;*/
+}
+
+.login_icon{
+    width: 260px;
+    margin-left: 116px;
+    display: inline-block;
+    font-size: 30px;
+    text-align: center;
+
+    /*background-color: #4893D2;*/
+
+}
+
+.icon{
+    width: 70px;
+    height: 70px;
+}
+
+.login_menu{
+    width: 500px;
+    height: 400px;
+    background-color: white;
+    font-size: 20px;
+
+    margin-top: 35px;
+    /*margin-left: 25px;*/
+
+    padding: 70px 100px;
+    border-radius: 30px;
+    /*float: right;*/
+}
+
+.id_bar{
+    width: 280px;
+    text-align: center;
+    margin-top: 10px;
+    border-radius: 30px;
+
+}
+
+.pw_bar{
+    width: 280px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    text-align: center;
+    border-radius: 30px;
+}
+
+.login_btn{
+
+    margin: 10px 210px;
+
+    text-align: left;
+    border-radius: 30px;
+
+
+}

@@ -9,6 +9,10 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--    구글폰트추가-->
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -25,10 +29,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/coffee.css">
     <link rel="stylesheet" href="../static/css/tabmenu.css">
+    <link rel="stylesheet" href="../static/css/login.css">
     <script src="../static/js/login.js" charset="ut-8"></script>
+    <script src="../../coffee_recommend_site_02,02월22일/static/js/start.js"></script>
 </head>
 
 <body>
+<!--    로그인-->
     {% if login == True %}
     <div class = "login">
     로그인에 성공했습니다. {{username}}님 어서오세요!
@@ -42,7 +49,9 @@
             <!-- tabContent 01 -->
             <article class="tabContent">
                 <div class="wrap">
-                    <div class="item-img"></div>
+                    <div class="item-img">
+                        <img src="https://images.unsplash.com/photo-1497935586351-b67a49e012bf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTh8fGNvZmZlZXxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60">
+                    </div>
                     <div class="item-desc">
                         <p>Coffee 등록페이지입니다.</p>
                     </div>
@@ -125,6 +134,13 @@
                             </select>
                         </div>
 
+                        <div class="form-floating" >
+                            <textarea class="form-control" placeholder="Comment" id="order-comment"
+                                      style="height: 100px"></textarea>
+                            <label for="order-comment"></label>
+                        </div>
+
+
 
                         <button type="button" onclick="order()" class="btn btn-primary btn-order">저장하기</button>
                     </div>
@@ -145,10 +161,12 @@
                         <th scope="col">sweet</th>
                         <th scope="col">flavor</th>
                         <th scope="col">bitter</th>
-                        <th scope="col">비고</th>
+                        <th scope="col">Comment</th>
+                        <th scope="col">Delete</th>
                     </tr>
                     </thead>
                     <tbody class="orders_list" id="orders-box">
+
                     </tbody>
                 </table>
             </article>
@@ -164,16 +182,39 @@
         </div>
     </div>
 
-
-
     <!--    로그인관련-->
-    {%else %}
-    <form methods = "get" id = "login" action = {{url_for("login")}}>
-        <input type="id" id = "loginId" name="loginId" placeholder="id">
-        <input type="password" id = "loginPw" name="loginPw" placeholder="Password">
-        <button type="submit" class="login">로그인</button>
-    </form>
-    {%endif%}
+
+    <div >
+        {%else %}
+<!--        <div class="login_img">-->
+<!--            <img src="https://images.unsplash.com/photo-1511920170033-f8396924c348?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8Y29mZmVlfGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60">-->
+<!--        </div>-->
+        <div class="login_wrap">
+            <div class="login_icon">
+                <img class="icon"
+                     src="https://cdn.icon-icons.com/icons2/1755/PNG/512/iconfinder-coffee04-3535188_113882.png">
+                오늘의 커피
+            </div>
+            <div class="login_menu">
+
+                <form methods="get" id="login" action={{url_for("login")}}>
+                    Username
+                    <br>
+                    <input class="id_bar" type="id" id="loginId" name="loginId" placeholder="">
+                    <br><br>
+
+                    Password
+                    <br>
+                    <input class="pw_bar" type="password" id="loginPw" name="loginPw" placeholder="">
+
+<!--                                <button type="submit" class="login login_bar">로그인</button>-->
+                    <button type="button submit" class="btn btn-outline-success login login_btn">로그인</button>
+                </form>
+            </div>
+        </div>
+        {%endif%}
+    </div>
+
 
 </body>
 </html>

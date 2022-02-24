@@ -159,7 +159,7 @@ input[type="radio"] {
     border-radius: 50%;
     position: absolute;
     top: 11.5px;
-    left: -23.5px;
+    left: -33.5px;
     -webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     -ms-transition: all 0.2s ease-in-out;
@@ -180,8 +180,8 @@ input[type="radio"] {
   .tab span {
     line-height: 50px;
     position: absolute;
-    top: 0;
-    left: -15px;
+    top: 1;
+    left: -25px;
   }
   /* Cancel Checked Input Background */
   .tabWrap [id^="tab"]:checked + label {
@@ -205,11 +205,11 @@ input[type="radio"] {
     left: 0;
   }
 }
-@media (min-width: 800px) {
+@media (min-width: 1000px) {
   #tabBox {
-    width: 700px;
+    width: 1250px;
   }
   .tabContent {
-    width: 730px;
+    width: 1300px;
   }
 }

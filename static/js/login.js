@@ -17,6 +17,7 @@ function listing() {
                 let sweet = coffees[i]['sweet'];
                 let flavor = coffees[i]['flavor'];
                 let bitter = coffees[i]['bitter'];
+                let comment = coffees[i]['comment'];
 
                 // delete_orders('${name}')
                 let temp_html = `
@@ -27,6 +28,7 @@ function listing() {
                                                     <td>${sweet}</td>
                                                     <td>${flavor}</td>
                                                     <td>${bitter}</td>
+                                                    <td>${comment}</td>
                                                     <th><button onclick="delete_orders('${name}')">삭제하기</button></th>
                                                 </tr>`
 
@@ -45,19 +47,20 @@ function order() {
     let sweet = $('#order-sweet').val();
     let flavor = $('#order-flavor').val();
     let bitter = $('#order-bitter').val();
-    debugger;
+    let comment = $('#order-comment').val();
+    // debugger;
     $.ajax({
         type: "POST",
         url: "/order",
         data: {
             name_give: name, body_give: body, acidity_give: acidity, sweet_give: sweet,
-            flavor_give: flavor, bitter_give: bitter
+            flavor_give: flavor, bitter_give: bitter, Comment_give: comment
         },
         success: function (response) {
 
-            debugger;
+            // debugger;
             if (response["result"] == "success") {
-                debugger;
+                // debugger;
                 alert(response["msg"]);
                 window.location.reload();
             }

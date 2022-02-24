@@ -1,3 +1,4 @@
+
 $(document).ready(function () {
     listing();
 });
@@ -45,19 +46,20 @@ function order() {
     let sweet = $('#order-sweet').val();
     let flavor = $('#order-flavor').val();
     let bitter = $('#order-bitter').val();
-    debugger;
+    let comments = $('#order-comments').val();
+    // debugger;
     $.ajax({
         type: "POST",
         url: "/order",
         data: {
             name_give: name, body_give: body, acidity_give: acidity, sweet_give: sweet,
-            flavor_give: flavor, bitter_give: bitter
+            flavor_give: flavor, bitter_give: bitter, Comments_give: comments
         },
         success: function (response) {
 
-            debugger;
+            // debugger;
             if (response["result"] == "success") {
-                debugger;
+                // debugger;
                 alert(response["msg"]);
                 window.location.reload();
             }

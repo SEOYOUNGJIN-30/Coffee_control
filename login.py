@@ -1,3 +1,4 @@
+
 from flask import url_for, session, Flask, render_template, request, redirect, jsonify
 from pymongo import MongoClient
 
@@ -11,7 +12,7 @@ client = MongoClient('mongodb://test:test@localhost', 27017)
 # client = MongoClient('localhost', 27017)
 db = client.coffe_site
 
-## HTML 화면 보여주기
+## 로그인 HTML 화면 보여주기
 @app.route('/')
 def home():
     if "userID" in session:
@@ -41,6 +42,13 @@ def logout():
 
 
 # 주문하기 시작
+# 주문 목록보기(Read) API check
+@app.route('/order_list', methods=['GET'])
+def view_orders():
+    coffee_list = list(db.coffes.find({}, {'_id': False}))
+    return jsonify({'coffee_order': coffee_list})
+
+
 # 주문하기(POST) API
 @app.route('/order', methods=['POST'])
 def save_order():
@@ -50,6 +58,7 @@ def save_order():
     sweet_receive = request.form['sweet_give']
     flavor_receive = request.form['flavor_give']
     bitter_receive = request.form['bitter_give']
+    comment_receive = request.form['Comment_give']
 
     doc = {
         'name': name_receive,
@@ -57,17 +66,12 @@ def save_order():
         'acidity': acidity_receive,
         'sweet': sweet_receive,
         'flavor': flavor_receive,
-        'bitter': bitter_receive
+        'bitter': bitter_receive,
+        'comment': comment_receive
     }
     db.coffes.insert_one(doc)
 
     return jsonify({'result': 'success', 'msg': '저장완료!'})
-
-# 주문 목록보기(Read) API check
-@app.route('/order_list', methods=['GET'])
-def view_orders():
-    coffee_list = list(db.coffes.find({}, {'_id': False}))
-    return jsonify({'coffee_order': coffee_list})
 
 @app.route('/order_delete', methods=['POST'])
 def delete_star():
